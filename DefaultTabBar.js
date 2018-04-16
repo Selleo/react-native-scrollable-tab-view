@@ -1,14 +1,9 @@
-const React = require('react');
-const { ViewPropTypes } = ReactNative = require('react-native');
-const PropTypes = require('prop-types');
-const createReactClass = require('create-react-class');
-const {
-  StyleSheet,
-  Text,
-  View,
-  Animated,
-} = ReactNative;
-const Button = require('./Button');
+const React = require('react')
+const ReactNative = require('react-native')
+const PropTypes = require('prop-types')
+const createReactClass = require('create-react-class')
+const { ViewPropTypes, StyleSheet, Text, View, Animated } = ReactNative
+const Button = require('./Button')
 
 const DefaultTabBar = createReactClass({
   propTypes: {
@@ -29,70 +24,69 @@ const DefaultTabBar = createReactClass({
       activeTextColor: 'navy',
       inactiveTextColor: 'black',
       backgroundColor: null,
-    };
+    }
   },
 
-  renderTabOption(name, page) {
-  },
+  renderTabOption(name, page) {},
 
   renderTab(name, page, isTabActive, onPressHandler) {
-    const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
-    const textColor = isTabActive ? activeTextColor : inactiveTextColor;
-    const fontWeight = isTabActive ? 'bold' : 'normal';
+    const { activeTextColor, inactiveTextColor, textStyle } = this.props
+    const textColor = isTabActive ? activeTextColor : inactiveTextColor
+    const fontWeight = isTabActive ? 'bold' : 'normal'
 
-    return <Button
-      style={{flex: 1, }}
-      key={name}
-      accessible={true}
-      accessibilityLabel={name}
-      accessibilityTraits='button'
-      onPress={() => onPressHandler(page)}
-    >
-      <View style={[styles.tab, this.props.tabStyle, ]}>
-        <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
-          {name}
-        </Text>
-      </View>
-    </Button>;
+    return (
+      <Button
+        accessibilityLabel={name}
+        accessibilityTraits="button"
+        accessible={true}
+        key={name}
+        onPress={() => onPressHandler(page)}
+        style={{ flex: 1 }}
+      >
+        <View style={[styles.tab, this.props.tabStyle]}>
+          <Text style={[{ color: textColor, fontWeight }, textStyle]}>{name}</Text>
+        </View>
+      </Button>
+    )
   },
 
   render() {
-    const containerWidth = this.props.containerWidth;
-    const numberOfTabs = this.props.tabs.length;
+    const containerWidth = this.props.containerWidth
+    const numberOfTabs = this.props.tabs.length
     const tabUnderlineStyle = {
       position: 'absolute',
       width: containerWidth / numberOfTabs,
       height: 4,
       backgroundColor: 'navy',
       bottom: 0,
-    };
+    }
 
     const translateX = this.props.scrollValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [0,  containerWidth / numberOfTabs],
-    });
+      outputRange: [0, containerWidth / numberOfTabs],
+    })
     return (
-      <View style={[styles.tabs, {backgroundColor: this.props.backgroundColor, }, this.props.style, ]}>
+      <View
+        style={[styles.tabs, { backgroundColor: this.props.backgroundColor }, this.props.style]}
+      >
         {this.props.tabs.map((name, page) => {
-          const isTabActive = this.props.activeTab === page;
-          const renderTab = this.props.renderTab || this.renderTab;
-          return renderTab(name, page, isTabActive, this.props.goToPage);
+          const isTabActive = this.props.activeTab === page
+          const renderTab = this.props.renderTab || this.renderTab
+          return renderTab(name, page, isTabActive, this.props.goToPage)
         })}
         <Animated.View
           style={[
             tabUnderlineStyle,
             {
-              transform: [
-                { translateX },
-              ]
+              transform: [{ translateX }],
             },
             this.props.underlineStyle,
           ]}
         />
       </View>
-    );
+    )
   },
-});
+})
 
 const styles = StyleSheet.create({
   tab: {
@@ -111,6 +105,6 @@ const styles = StyleSheet.create({
     borderRightWidth: 0,
     borderColor: '#ccc',
   },
-});
+})
 
-module.exports = DefaultTabBar;
+module.exports = DefaultTabBar
