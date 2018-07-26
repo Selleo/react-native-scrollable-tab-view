@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint -c .eslintrc . --ignore-path .gitignore",
+    "lint": "eslint --ext .js ./ ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brentvatne/react-native-scrollable-tab-view.git"
+    "url": "git+https://github.com/selleo/react-native-scrollable-tab-view.git"
   },
   "keywords": [
     "react-native-component",
@@ -19,24 +19,23 @@
     "tab",
     "scrollable"
   ],
-  "author": "Brent Vatne",
+  "author": "Damian Sznajder",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/brentvatne/react-native-scrollable-tab-view/issues"
+    "url": "https://github.com/selleo/react-native-scrollable-tab-view/issues"
   },
   "peerDependencies": {
     "react-native": ">=0.20.0"
   },
-  "homepage": "https://github.com/brentvatne/react-native-scrollable-tab-view#readme",
+  "homepage": "https://github.com/selleo/react-native-scrollable-tab-view#readme",
   "dependencies": {
-    "create-react-class": "^15.6.2",
-    "prop-types": "^15.6.0",
-    "react-timer-mixin": "^0.13.3"
+    "prop-types": "^15.6.2"
   },
   "devDependencies": {
-    "@selleo/eslint-config-react": "^0.4.0",
-    "babel-eslint": "^8.2.3",
-    "eslint": "^4.19.1",
+    "@selleo/eslint-config-react": "^1.0.0",
+    "babel-eslint": "^8.2.6",
+    "babel-preset-react-native": "^4.0.0",
+    "eslint": "^5.2.0",
     "eslint-plugin-react-native": "^3.2.1"
   }
 }

@@ -1,6 +1,12 @@
-const React = require('react')
+import React from 'react'
+import PropTypes from 'prop-types'
 
-class StaticContainer extends React.Component {
+export default class StaticContainer extends React.Component {
+  static propTypes = {
+    shouldUpdate: PropTypes.bool,
+    children: PropTypes.any,
+  }
+
   shouldComponentUpdate(nextProps) {
     return !!nextProps.shouldUpdate
   }
@@ -13,5 +19,3 @@ class StaticContainer extends React.Component {
     return React.Children.only(child)
   }
 }
-
-module.exports = StaticContainer

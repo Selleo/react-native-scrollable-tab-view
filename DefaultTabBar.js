@@ -1,33 +1,31 @@
-const React = require('react')
-const ReactNative = require('react-native')
-const PropTypes = require('prop-types')
-const createReactClass = require('create-react-class')
-const { ViewPropTypes, StyleSheet, Text, View, Animated } = ReactNative
-const Button = require('./Button')
+import React from 'react'
+import { StyleSheet, Text, View, Animated } from 'react-native'
+import PropTypes from 'prop-types'
+import Button from './Button'
 
-const DefaultTabBar = createReactClass({
-  propTypes: {
-    goToPage: PropTypes.func,
+const borderColor = '#cccccc'
+export default class DefaultTabBar extends React.Component {
+  propTypes = {
     activeTab: PropTypes.number,
-    tabs: PropTypes.array,
-    backgroundColor: PropTypes.string,
     activeTextColor: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    containerWidth: PropTypes.number.isRequired,
+    goToPage: PropTypes.func,
     inactiveTextColor: PropTypes.string,
-    textStyle: Text.propTypes.style,
-    tabStyle: ViewPropTypes.style,
     renderTab: PropTypes.func,
-    underlineStyle: ViewPropTypes.style,
-  },
+    scrollValue: PropTypes.object.isRequired,
+    style: PropTypes.any,
+    tabStyle: PropTypes.any,
+    tabs: PropTypes.array,
+    textStyle: PropTypes.any,
+    underlineStyle: PropTypes.any,
+  }
 
-  getDefaultProps() {
-    return {
-      activeTextColor: 'navy',
-      inactiveTextColor: 'black',
-      backgroundColor: null,
-    }
-  },
-
-  renderTabOption(name, page) {},
+  static defaultProps = {
+    activeTextColor: 'navy',
+    inactiveTextColor: 'black',
+    backgroundColor: null,
+  }
 
   renderTab(name, page, isTabActive, onPressHandler) {
     const { activeTextColor, inactiveTextColor, textStyle } = this.props
@@ -41,14 +39,14 @@ const DefaultTabBar = createReactClass({
         accessible={true}
         key={name}
         onPress={() => onPressHandler(page)}
-        style={{ flex: 1 }}
+        style={styles.button}
       >
         <View style={[styles.tab, this.props.tabStyle]}>
           <Text style={[{ color: textColor, fontWeight }, textStyle]}>{name}</Text>
         </View>
       </Button>
     )
-  },
+  }
 
   render() {
     const containerWidth = this.props.containerWidth
@@ -85,8 +83,8 @@ const DefaultTabBar = createReactClass({
         />
       </View>
     )
-  },
-})
+  }
+}
 
 const styles = StyleSheet.create({
   tab: {
@@ -103,8 +101,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderColor: '#ccc',
+    borderColor,
+  },
+  button: {
+    flex: 1,
   },
 })
-
-module.exports = DefaultTabBar
